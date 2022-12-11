@@ -28,7 +28,6 @@ function closeModalWindow(element) {
   const addEventFunction = (event) => {
     if (event.code === "Escape" && element.visible() === true) {
       element.close(document.removeEventListener("keydown", addEventFunction));
-      console.log(event);
     }
   };
   document.addEventListener("keydown", addEventFunction);
