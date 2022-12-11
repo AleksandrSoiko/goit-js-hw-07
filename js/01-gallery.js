@@ -25,11 +25,13 @@ galleryContainerRef.addEventListener("click", (event) => {
 });
 
 function closeModalWindow(element) {
-  document.addEventListener("keydown", (event) => {
+  const addEventFunction = (event) => {
     if (event.code === "Escape" && element.visible() === true) {
-      element.close();
+      element.close(document.removeEventListener("keydown", addEventFunction));
+      console.log(event);
     }
-  });
+  };
+  document.addEventListener("keydown", addEventFunction);
 }
 
 function openModalWindow(element) {
