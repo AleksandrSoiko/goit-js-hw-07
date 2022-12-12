@@ -18,14 +18,10 @@ function createItemOfGallery(array) {
 
 const lightbox = new SimpleLightbox(".gallery a", {
   scrollZoom: false,
+  captionsData: "alt",
+  captionDelay: 250,
+  captionPosition: "bottom",
 });
-
-function addCaptionToImage() {
-  lightbox.options.captionsData = "alt";
-  lightbox.options.captionDelay = 250;
-}
-
-addCaptionToImage();
 
 // я запретил скролл потому что в хроме при увеличения изображения
 //  скролом появляеться много ошибок связанных с превентдефолт
