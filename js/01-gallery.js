@@ -21,7 +21,6 @@ galleryContainerRef.addEventListener("click", (event) => {
   const closeModalWindow = (event) => {
     if (event.code === "Escape" && modalBox.visible() === true) {
       modalBox.close();
-      console.log("hhhh");
     }
   };
   const openModalWindow = () => {
