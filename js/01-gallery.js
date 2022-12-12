@@ -1,7 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-// Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
 const galleryContainerRef = document.querySelector(".gallery");
 createItemOfGallery(galleryItems, galleryContainerRef);
 
@@ -13,31 +12,29 @@ function createItemOfGallery(array, elementRef) {
     .join("");
   elementRef.innerHTML = galleryItemsRef;
 }
-// Реалізація делегування на div.gallery і отримання url великого зображення.
 
 galleryContainerRef.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  const modalBox = basicLightbox.create(
-    `<img src="${event.target.dataset.source}">`
-  );
-  openModalWindow(modalBox);
-  closeModalWindow(modalBox);
-});
-
-function closeModalWindow(element) {
-  const addEventFunction = (event) => {
-    if (event.code === "Escape" && element.visible() === true) {
-      element.close(() =>
-        document.removeEventListener("keydown", addEventFunction)
-      );
+  const closeModalWindow = (event) => {
+    if (event.code === "Escape" && modalBox.visible() === true) {
+      modalBox.close();
+      console.log("hhhh");
     }
   };
-  document.addEventListener("keydown", addEventFunction);
-}
+  const openModalWindow = () => {
+    modalBox.show();
+  };
 
-function openModalWindow(element) {
-  element.show();
-}
+  const modalBox = basicLightbox.create(
+    `<img src="${event.target.dataset.source}">`,
+    {
+      onShow: () => document.addEventListener("keydown", closeModalWindow),
+      onClose: () => document.removeEventListener("keydown", closeModalWindow),
+    }
+  );
+
+  openModalWindow();
+});
