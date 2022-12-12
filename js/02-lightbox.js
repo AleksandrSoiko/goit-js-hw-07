@@ -8,9 +8,9 @@ createItemOfGallery(galleryItems);
 function createItemOfGallery(array) {
   const galleryItemsRef = array
     .map(({ preview, original, description }) => {
-      return `<a class="gallery__item" href="${original}">
+      return `<li><a class="gallery__item" href="${original}">
   <img class="gallery__image" src="${preview}" alt="${description}" />
-</a>`;
+</a></li>`;
     })
     .join("");
   galleryContainerRef.innerHTML = galleryItemsRef;
@@ -18,10 +18,15 @@ function createItemOfGallery(array) {
 
 const lightbox = new SimpleLightbox(".gallery a", {
   scrollZoom: false,
-  captionsData: "alt",
-  captionDelay: 250,
 });
-console.dir(lightbox);
+
+function addCaptionToImage() {
+  lightbox.options.captionsData = "alt";
+  lightbox.options.captionDelay = 250;
+}
+
+addCaptionToImage();
+
 // я запретил скролл потому что в хроме при увеличения изображения
 //  скролом появляеться много ошибок связанных с превентдефолт
 // simple-lightbox.min.js:1 Unable to preventDefault inside passive event listener invocation.
