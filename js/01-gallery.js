@@ -18,8 +18,14 @@ function createItemOfGallery(array, elementRef) {
 galleryContainerRef.addEventListener("click", (event) => {
   event.preventDefault();
   const modalBox = basicLightbox.create(
-    `<img src="${event.target.dataset.source}">`
+    `<img src="${event.target.dataset.source}">`,
+    {
+      onShow: () => event.target.classList.value === "gallery__image",
+    }
   );
+  console.dir(event.target.classList.value);
+  console.dir(event.currentTarget.classList.value);
+
   openModalWindow(modalBox);
   closeModalWindow(modalBox);
 });
